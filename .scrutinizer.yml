@@ -1,0 +1,41 @@
+filter:
+  paths:
+    - "app/"
+  excluded_paths:
+    #- "app/Http/Middleware/Authenticate.php"
+    #- "app/Providers/BroadcastServiceProvider.php"
+build:
+  environment:
+    php: '8.0'
+    hosts:
+      laravel.dev: '127.0.0.1'
+    variables:
+      APP_ENV: 'testing'
+      APP_URL: 'http://laravel.dev'
+      API_HOST: 'laravel.dev'
+      MAIL_DRIVER: 'log'
+  cache:
+    directories:
+      - vendor/
+      - ~/.composer/cache/
+  dependencies:
+    before:
+      - cp .env.example .env
+      - composer self-update
+      - composer install --no-interaction
+      - chmod -R 777 storage
+      - chmod -R 777 bootstrap/cache
+      - rm -rf node_modules
+      - php artisan key:generate
+  project_setup:
+    override:
+      - true
+  tests:
+    override:
+      - php-scrutinizer-run
+      - vendor/bin/php-cs-fixer fix app --dry-run --rules=@PSR2
+      -
+        command: vendor/bin/phpunit --coverage-clover=clover-coverage
+        coverage:
+          file: clover-coverage
+          format: clover
