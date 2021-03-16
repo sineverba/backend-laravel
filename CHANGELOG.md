@@ -5,3 +5,8 @@
 + Add Github stuffes
 + Add Docker for development
 + Add coveralls
++ Add Docker for deploy in production
++ Add CircleCI
++ Add Semaphore
++ Add Coveralls
++ Add Codecov

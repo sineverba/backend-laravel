@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  test-unit:
+    docker:
+      - image: sineverba/php8xc:1.0.0
+    steps:
+      - checkout
+      - run: composer install
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      - run: ./vendor/bin/phpunit
+      - run: vendor/bin/php-cs-fixer fix app --dry-run --rules=@PSR2
+
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - test-unit:
+          filters:
+            branches:
+              only:
+                - develop
