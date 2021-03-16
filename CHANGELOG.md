@@ -3,3 +3,4 @@
 + Add `Scrutinizer`
 + Fix `Style CI`
 + Add Github stuffes
++ Add Docker for development
