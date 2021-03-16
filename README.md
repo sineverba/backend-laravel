@@ -18,6 +18,17 @@ If you like this project or use it, **Star it!**. Your stars motivate developers
 | Composer | 2 |
 | Laravel | 8 |
 
+## How setup it
+
+```bash
+$ cp .env.example .env
+$ php artisan key:generate
+$ docker-compose build app
+$ docker-compose up -d
+$ docker-compose exec app composer install
+$ docker-compose exec app php artisan key:generate
+```
+
 ## How to contribute
 See `CONTRIBUTING.md` on how to contribute. Every contribute will be fully credited.
 

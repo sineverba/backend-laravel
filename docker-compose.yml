@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  app:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: ./docker-compose/app/Dockerfile
+    image: backend-laravel-app:0.1.0
+    container_name: backend-laravel-app
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - backend-laravel
+
+  nginx:
+    image: nginx:1.19.8-alpine
+    container_name: backend-laravel-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - backend-laravel
+
+  db:
+    image: mysql:8.0.23
+    container_name: backend-laravel-mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    networks:
+      - backend-laravel
+
+  adminer:
+    image: adminer:4.7.8-standalone
+    container_name: backend-laravel-adminer
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - backend-laravel
+
+networks:
+  backend-laravel:
+    driver: bridge

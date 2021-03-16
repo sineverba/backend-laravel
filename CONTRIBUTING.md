@@ -12,7 +12,7 @@ We accept contributions via Pull Requests.
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests. We follow TDD patterns,
   so code coverage need to be 100%. Continuous Integrations are enabled, so your PR need to pass them before accepted.
 
-- **Document any change in behaviour** - Make sure the `README.md`, `CHANGELOG.md` and any other relevant documentation are kept up-to-date.
+- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
 
 - **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
 
