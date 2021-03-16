@@ -10,3 +10,4 @@
 + Add Semaphore
 + Add Coveralls
 + Add Codecov
++ Add ClearDB configuration
