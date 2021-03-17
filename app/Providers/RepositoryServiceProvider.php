@@ -3,7 +3,6 @@
 
 namespace App\Providers;
 
-
 use App\Interfaces\PingInterface;
 use App\Repositories\PingRepository;
 use Carbon\Laravel\ServiceProvider;

@@ -3,7 +3,6 @@
 
 namespace App\Gateways;
 
-
 use Illuminate\Database\Eloquent\Collection;
 
 class BaseGateway

@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Interfaces\PingInterface;
 
 class PingRepository implements PingInterface

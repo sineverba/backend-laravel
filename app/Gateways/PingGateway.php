@@ -2,6 +2,7 @@
 
 
 namespace App\Gateways;
+
 use App\Interfaces\PingInterface;
 
 class PingGateway extends BaseGateway
