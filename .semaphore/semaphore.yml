@@ -1,0 +1,39 @@
+version: v1.0
+name: Backend Laravel CI
+agent:
+  machine:
+    type: e1-standard-2
+
+  containers:
+    - name: main
+      image: sineverba/php8xc:1.0.0
+
+  image_pull_secrets:
+    - name: DOCKERHUB
+
+global_job_config:
+  secrets:
+    - name: BACKEND-LARAVEL
+
+blocks:
+  - name: "unit tests"
+    skip:
+      when: "tag =~ '.*'"
+    task:
+      jobs:
+        - name: "Run PHPUnit"
+          commands:
+            - checkout
+            - composer install
+            - cp .env.example .env
+            - php artisan key:generate
+            - ./vendor/bin/phpunit
+            - vendor/bin/php-cs-fixer fix app --dry-run --rules=@PSR2
+            - php vendor/bin/php-coveralls --coverage_clover=./coverage/clover.xml --json_path=./coverage/coveralls-upload.json -v
+            - bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+
+promotions:
+  - name: Build and production
+    pipeline_file: deploy.yml
+    auto_promote:
+      when: "result = 'passed' and tag =~ '.*'"

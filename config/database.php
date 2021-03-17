@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Str;
 
+$cleardb_url = parse_url(env('CLEARDB_DATABASE_URL', 'mysql://u:p@a/d'));
+
 return [
 
     /*
@@ -34,6 +36,25 @@ return [
     */
 
     'connections' => [
+
+        'cleardb' => [
+            'driver' => $cleardb_url['scheme'],
+            'host' => $cleardb_url['host'],
+            'port' => isset($cleardb_url['port']) ? $cleardb_url['port'] : '3306',
+            'database' => substr($cleardb_url['path'], 1),
+            'username' => $cleardb_url['user'],
+            'password' => $cleardb_url['pass'],
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',
