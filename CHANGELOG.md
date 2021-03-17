@@ -1,4 +1,4 @@
-# Next version
+# 0.1.0
 + First commit
 + Add `Scrutinizer`
 + Fix `Style CI`
