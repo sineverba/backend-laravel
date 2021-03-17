@@ -24,6 +24,7 @@
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="APP_KEY" value="base64:fOzwoINcZUauvaEZUsYpc6g45cY8Qz0MH/qfoV628r4="/>
+        <server name="APP_VERSION" value="0.0.1"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
         <server name="DB_CONNECTION" value="sqlite"/>

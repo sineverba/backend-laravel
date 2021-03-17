@@ -22,6 +22,14 @@ If you like this project or use it, **Star it!**. Your stars motivate developers
 | Composer | 2 |
 | Laravel | 8 |
 
+## Available routes
+
+__ping__ is a free, not protected route.
+
+| Verb | Route |
+| ---- | ----- |
+| GET | /api/v1/ping |
+
 ## How setup it
 
 ```bash
