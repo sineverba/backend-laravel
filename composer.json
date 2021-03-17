@@ -1,10 +1,16 @@
 {
-    "name": "laravel/laravel",
+    "name": "sineverba/backend-laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Php based backend, written with Laravel",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "php",
+        "backend",
+        "api",
+        "api-rest",
+        "jwt",
+        "jwt-token"
     ],
     "license": "MIT",
     "require": {
