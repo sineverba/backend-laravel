@@ -1,4 +1,7 @@
-# 0.1.0
+# Next version
++ Remove frontend stuffes
+
+## 0.1.0
 + First commit
 + Add `Scrutinizer`
 + Fix `Style CI`
