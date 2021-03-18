@@ -24,7 +24,6 @@
                     "Ping"
                 ],
                 "summary": "Return current status of app",
-                "operationId": "App\\Http\\Controllers\\Api\\V1\\PingController::index",
                 "responses": {
                     "200": {
                         "description": "Current app status",

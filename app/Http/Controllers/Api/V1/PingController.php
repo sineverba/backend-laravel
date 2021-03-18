@@ -25,8 +25,4 @@ class PingController extends ApiController
      *    )
      * )
      */
-    public function index()
-    {
-        $this->index();
-    }
 }
