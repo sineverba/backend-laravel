@@ -12,4 +12,17 @@ class PingController extends ApiController
     {
         $this->setGateway($gateway);
     }
+
+    /**
+     * @OA\Get(
+     *   path="/api/v1/ping",
+     *   summary="Return current status of app",
+     *   tags={"Ping"},
+     *    @OA\Response(
+     *      response=200,
+     *      description="Current app status",
+     *      @OA\JsonContent(ref="#/components/schemas/PingSchema")
+     *    )
+     * )
+     */
 }

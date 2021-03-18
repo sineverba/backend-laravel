@@ -23,6 +23,8 @@ If you like this project or use it, **Star it!**. Your stars motivate developers
 
 ## Available routes
 
+Swagger documentation at {your_host}/api/documentation
+
 __ping__ is a free, not protected route.
 
 | Verb | Route |

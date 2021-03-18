@@ -10,8 +10,9 @@ test:
 deploy:
 	docker push registry.heroku.com/backend-laravel/web
 	heroku container:release web -a backend-laravel
-	heroku run php /var/www/artisan migrate --force --app backend-laravel
+	#heroku run php /var/www/artisan migrate --force --app backend-laravel
 	heroku labs:enable --app=backend-laravel runtime-new-layer-extract
+	heroku run php /var/www/artisan l5-swagger:generate --app backend-laravel
 
 destroy:
 	docker image rm registry.heroku.com/backend-laravel/web
