@@ -1,0 +1,70 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Backend Laravel Api documentation",
+        "description": "Backend Laravel API description",
+        "contact": {
+            "email": "info@example.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "https://backend-laravel.herokuapp.com",
+            "description": "Api Server"
+        }
+    ],
+    "paths": {
+        "/api/v1/ping": {
+            "get": {
+                "tags": [
+                    "Ping"
+                ],
+                "summary": "Return current status of app",
+                "responses": {
+                    "200": {
+                        "description": "Current app status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PingSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PingSchema": {
+                "title": "Ping",
+                "description": "Ping model",
+                "properties": {
+                    "data": {
+                        "description": "Ping status",
+                        "type": "string",
+                        "items": {
+                            "properties": {
+                                "app_version": {
+                                    "description": "Backend current version",
+                                    "type": "string",
+                                    "example": "1.0.0"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

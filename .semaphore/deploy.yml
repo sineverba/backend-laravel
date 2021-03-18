@@ -33,3 +33,4 @@ blocks:
             #- heroku run php /var/www/artisan migrate --force --app $HEROKU_APP
             - heroku config:set APP_VERSION=$SEMAPHORE_GIT_TAG_NAME -a $HEROKU_APP
             - heroku labs:enable --app=$HEROKU_APP runtime-new-layer-extract
+            - heroku run php /var/www/artisan l5-swagger:generate --app $HEROKU_APP
