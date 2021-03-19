@@ -1,6 +1,7 @@
 # Next version
 + Add `roles` route
 + Add `sort` and `paginate`
++ Bump dependencies
 
 ## 0.2.0
 + Remove frontend stuffes
