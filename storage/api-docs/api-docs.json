@@ -9,7 +9,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "0.1.0"
+        "version": "0.2.0"
     },
     "servers": [
         {
@@ -37,6 +37,26 @@
                     }
                 }
             }
+        },
+        "/api/v1/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Return roles list",
+                "responses": {
+                    "200": {
+                        "description": "Role list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RolesSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -54,6 +74,32 @@
                                     "description": "Backend current version",
                                     "type": "string",
                                     "example": "1.0.0"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "RolesSchema": {
+                "title": "Roles",
+                "description": "Roles model",
+                "properties": {
+                    "data": {
+                        "description": "List of roles",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "description": "ID of the role",
+                                    "type": "number",
+                                    "example": 1
+                                },
+                                "role": {
+                                    "description": "Name of the role",
+                                    "type": "string",
+                                    "example": "admin"
                                 }
                             },
                             "type": "object"

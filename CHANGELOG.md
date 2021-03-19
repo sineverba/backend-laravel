@@ -1,4 +1,7 @@
-# 0.2.0
+# Next version
++ Add `roles` route
+
+## 0.2.0
 + Remove frontend stuffes
 + Add L5 Swagger
 
