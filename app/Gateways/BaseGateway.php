@@ -19,7 +19,7 @@ class BaseGateway
         $this->interface = $interface;
     }
 
-    public function index():Collection|array
+    public function index()
     {
         return $this->getInterface()->index();
     }

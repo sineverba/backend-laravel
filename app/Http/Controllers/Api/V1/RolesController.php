@@ -18,6 +18,8 @@ class RolesController extends ApiController
      *   path="/api/v1/roles",
      *   summary="Return roles list",
      *   tags={"Roles"},
+     *   @OA\Parameter(ref="#/components/parameters/limit_query"),
+     *   @OA\Parameter(ref="#/components/parameters/sort_query"),
      *    @OA\Response(
      *      response=200,
      *      description="Role list",

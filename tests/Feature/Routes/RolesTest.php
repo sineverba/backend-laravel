@@ -27,7 +27,26 @@ class RolesTest extends TestCase
             Route('roles_index')
         );
         $request->assertStatus(200);
-        $request->assertJsonCount(0, $request->getData());
+        $request->assertJsonStructure(
+            [
+                'current_page',
+                'data',
+                'first_page_url',
+                'from',
+                'last_page',
+                'last_page_url',
+                'next_page_url',
+                'per_page',
+                'prev_page_url',
+                'to',
+                'total',
+            ]
+        );
+        $request->assertJsonFragment([
+            'total' => 0,
+            'per_page' => 15
+        ]);
+
         // 1 item
         RolesRepository::factory()->create();
         $request = $this->json(
@@ -36,6 +55,11 @@ class RolesTest extends TestCase
         );
         $request->assertJsonStructure([]);
         $data = $request->getData();
-        $this->assertTrue($data[0]->role === 'admin');
+        $this->assertTrue($data->data[0]->role === 'admin');
+
+        $request->assertJsonFragment([
+            'total' => 1,
+            'per_page' => 15
+        ]);
     }
 }

@@ -36,4 +36,14 @@ class RolesRepository extends BaseRepository implements RolesInterface
      * @var string
      */
     protected $table = "roles";
+
+    /**
+     * The sortable columns
+     */
+    public $sortables = [
+        'id',
+        'name',
+        'created_at',
+        'updated_at'
+    ];
 }
