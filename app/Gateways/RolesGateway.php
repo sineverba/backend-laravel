@@ -2,6 +2,7 @@
 
 
 namespace App\Gateways;
+
 use App\Interfaces\RolesInterface;
 
 class RolesGateway extends BaseGateway
