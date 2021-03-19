@@ -35,7 +35,7 @@ class RolesRepositoryTest extends TestCase
         $this->withoutExceptionHandling();
         $repository = new RolesRepository();
         $items = $repository->index();
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $items);
+        $this->assertInstanceOf('Illuminate\Pagination\LengthAwarePaginator', $items);
         $this->assertCount(0, $items);
     }
 
