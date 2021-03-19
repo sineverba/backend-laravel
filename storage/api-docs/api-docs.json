@@ -9,7 +9,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "0.1.0"
+        "version": "0.2.0"
     },
     "servers": [
         {
@@ -31,6 +31,34 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PingSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Return roles list",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit_query"
+                    },
+                    {
+                        "$ref": "#/components/parameters/sort_query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Role list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RolesSchema"
                                 }
                             }
                         }
@@ -61,6 +89,52 @@
                     }
                 },
                 "type": "object"
+            },
+            "RolesSchema": {
+                "title": "Roles",
+                "description": "Roles model",
+                "properties": {
+                    "data": {
+                        "description": "List of roles",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "description": "ID of the role",
+                                    "type": "number",
+                                    "example": 1
+                                },
+                                "role": {
+                                    "description": "Name of the role",
+                                    "type": "string",
+                                    "example": "admin"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "limit_query": {
+                "name": "per_page",
+                "in": "query",
+                "description": "Limit the number of results",
+                "schema": {
+                    "type": "number",
+                    "default": 15
+                }
+            },
+            "sort_query": {
+                "name": "sort",
+                "in": "query",
+                "description": "Sort the result",
+                "schema": {
+                    "type": "string",
+                    "default": "id"
+                }
             }
         }
     },
