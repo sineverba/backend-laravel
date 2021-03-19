@@ -30,6 +30,7 @@ __ping__ is a free, not protected route.
 | Verb | Route |
 | ---- | ----- |
 | GET | /api/v1/ping |
+| GET | /api/v1/roles |
 
 ## How setup it
 

@@ -12,7 +12,7 @@ class PingTest extends TestCase
      *
      * @return void
      */
-    public function test_get_ping():void
+    public function test_route_get():void
     {
         $this->withoutExceptionHandling();
         $request = $this->json(

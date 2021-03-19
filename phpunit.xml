@@ -16,6 +16,10 @@
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <exclude>
+            <file>./app/Console/Kernel.php</file>
+            <file>./app/Providers/BroadcastServiceProvider.php</file>
+        </exclude>
         <report>
             <clover outputFile="./coverage/clover.xml"/>
             <html outputDirectory="./coverage/clover/" lowUpperBound="35" highLowerBound="90"/>
