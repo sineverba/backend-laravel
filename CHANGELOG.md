@@ -1,4 +1,7 @@
-# 0.3.0
+# Next version
++ Add `users` route
+
+## 0.3.0
 + Add `roles` route
 + Add `sort` and `paginate`
 + Bump dependencies
