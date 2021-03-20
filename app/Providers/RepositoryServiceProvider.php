@@ -5,8 +5,10 @@ namespace App\Providers;
 
 use App\Interfaces\PingInterface;
 use App\Interfaces\RolesInterface;
+use App\Interfaces\UsersInterface;
 use App\Repositories\PingRepository;
 use App\Repositories\RolesRepository;
+use App\Repositories\UsersRepository;
 use Carbon\Laravel\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -21,6 +23,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             RolesInterface::class,
             RolesRepository::class
+        );
+
+        $this->app->bind(
+            UsersInterface::class,
+            UsersRepository::class
         );
     }
 }

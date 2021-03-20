@@ -16,3 +16,6 @@ deploy:
 
 destroy:
 	docker image rm registry.heroku.com/backend-laravel/web
+
+swagger:
+	docker-compose exec app php artisan l5-swagger:generate

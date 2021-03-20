@@ -9,12 +9,13 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class RolesTest extends TestCase
+class UsersTest extends TestCase
 {
-    use DatabaseMigrations;
     use RefreshDatabase;
+    use DatabaseMigrations;
+
     /**
-     * Test GET /roles
+     * Test GET /users
      *
      * @return void
      */
@@ -24,7 +25,7 @@ class RolesTest extends TestCase
         // 0 items
         $request = $this->json(
             'GET',
-            Route('roles_index'),
+            Route('users_index'),
             [
                 'sort' => 'id',
                 'direction' => 'desc'
@@ -55,11 +56,13 @@ class RolesTest extends TestCase
         $this->seed(DatabaseSeeder::class);
         $request = $this->json(
             'GET',
-            Route('roles_index')
+            Route('users_index')
         );
         $request->assertJsonStructure([]);
         $data = $request->getData();
-        $this->assertTrue($data->data[0]->role === 'admin');
+        $this->assertEquals(1, $data->data[0]->id);
+        $this->assertEquals('info@example.com', $data->data[0]->email);
+        $this->assertEquals('admin', $data->data[0]->roles->role);
 
         $request->assertJsonFragment([
             'total' => 1,

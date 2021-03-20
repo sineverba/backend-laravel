@@ -9,16 +9,12 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class RolesGatewayTest extends TestCase
+class UsersGatewayTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;
-    /**
-     * The gateway
-     *
-     * @var string
-     */
-    private $gateway = 'App\Gateways\RolesGateway';
+
+    private $gateway = 'App\Gateways\UsersGateway';
 
     /**
      * Test can instantiate class
