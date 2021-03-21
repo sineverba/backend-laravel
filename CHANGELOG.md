@@ -1,6 +1,7 @@
 # Next version
 + Add `users` route
 + Add `JWT`
++ Add `login` route
 
 ## 0.3.0
 + Add `roles` route
