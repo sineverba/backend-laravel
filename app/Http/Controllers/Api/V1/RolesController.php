@@ -10,6 +10,7 @@ class RolesController extends ApiController
 {
     public function __construct(RolesGateway $gateway)
     {
+        parent::__construct();
         $this->setGateway($gateway);
     }
 
@@ -17,6 +18,7 @@ class RolesController extends ApiController
      * @OA\Get(
      *   path="/api/v1/roles",
      *   summary="Return roles list",
+     *   security={{"bearerAuth":{}}},
      *   tags={"Roles"},
      *   @OA\Parameter(ref="#/components/parameters/limit_query"),
      *   @OA\Parameter(ref="#/components/parameters/sort_query"),
@@ -24,6 +26,10 @@ class RolesController extends ApiController
      *      response=200,
      *      description="Role list",
      *      @OA\JsonContent(ref="#/components/schemas/RolesSchema")
+     *    ),
+     *    @OA\Response(
+     *      response=401,
+     *      description="Unauthenticated",
      *    )
      * )
      */

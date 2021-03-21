@@ -4,6 +4,7 @@
 namespace Tests\Feature\Routes;
 
 
+use App\Repositories\UsersRepository;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,22 +16,53 @@ class UsersTest extends TestCase
     use DatabaseMigrations;
 
     /**
+     * Test cannot index without token
+     *
+     * @return void
+     */
+    public function test_cannot_index_without_token()
+    {
+        $request = $this->json(
+            'GET',
+            Route('users_index')
+        );
+        $request->assertJsonStructure(
+            [
+                'error',
+            ]
+        );
+        $request->assertStatus(401);
+        $request->assertJsonFragment([
+            'error' => 'Unauthenticated',
+        ]);
+    }
+
+    /**
      * Test GET /users
      *
      * @return void
      */
     public function test_route_get(): void
     {
-        $this->withoutExceptionHandling();
+        $payload = [
+            'email' => 'admin@example.com',
+            'role_id' => null,
+        ];
+        $user = UsersRepository::factory()->create($payload);
+        $token = auth()->fromUser($user);
         // 0 items
-        $request = $this->json(
-            'GET',
-            Route('users_index'),
-            [
-                'sort' => 'id',
-                'direction' => 'desc'
-            ]
-        );
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+                'GET',
+                Route('users_index'),
+                [
+                    'sort' => 'id',
+                    'direction' => 'desc'
+                ]
+            );
         $request->assertStatus(200);
         $request->assertJsonStructure(
             [
@@ -48,24 +80,32 @@ class UsersTest extends TestCase
             ]
         );
         $request->assertJsonFragment([
-            'total' => 0,
+            'total' => 1,
             'per_page' => 15
         ]);
 
         // 1 item
         $this->seed(DatabaseSeeder::class);
-        $request = $this->json(
-            'GET',
-            Route('users_index')
-        );
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+                'GET',
+                Route('users_index'),
+                [
+                    'sort' => 'id',
+                    'direction' => 'desc'
+                ]
+            );
         $request->assertJsonStructure([]);
         $data = $request->getData();
         $this->assertEquals(1, $data->data[0]->id);
-        $this->assertEquals('info@example.com', $data->data[0]->email);
-        $this->assertEquals('admin', $data->data[0]->roles->role);
+        $this->assertEquals('info@example.com', $data->data[1]->email);
+        $this->assertEquals('admin', $data->data[1]->roles->role);
 
         $request->assertJsonFragment([
-            'total' => 1,
+            'total' => 2,
             'per_page' => 15
         ]);
     }

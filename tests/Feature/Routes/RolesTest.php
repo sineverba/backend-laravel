@@ -4,6 +4,7 @@
 namespace Tests\Feature\Routes;
 
 
+use App\Repositories\UsersRepository;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,6 +14,29 @@ class RolesTest extends TestCase
 {
     use DatabaseMigrations;
     use RefreshDatabase;
+
+    /**
+     * Test cannot index without token
+     *
+     * @return void
+     */
+    public function test_cannot_index_without_token()
+    {
+        $request = $this->json(
+            'GET',
+            Route('roles_index')
+        );
+        $request->assertJsonStructure(
+            [
+                'error',
+            ]
+        );
+        $request->assertStatus(401);
+        $request->assertJsonFragment([
+            'error' => 'Unauthenticated',
+        ]);
+    }
+
     /**
      * Test GET /roles
      *
@@ -20,9 +44,18 @@ class RolesTest extends TestCase
      */
     public function test_route_get(): void
     {
-        $this->withoutExceptionHandling();
+        $payload = [
+            'email' => 'admin@example.com',
+            'role_id' => null,
+        ];
+        $user = UsersRepository::factory()->create($payload);
+        $token = auth()->fromUser($user);
         // 0 items
-        $request = $this->json(
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
             'GET',
             Route('roles_index'),
             [
@@ -53,10 +86,18 @@ class RolesTest extends TestCase
 
         // 1 item
         $this->seed(DatabaseSeeder::class);
-        $request = $this->json(
-            'GET',
-            Route('roles_index')
-        );
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+                'GET',
+                Route('roles_index'),
+                [
+                    'sort' => 'id',
+                    'direction' => 'desc'
+                ]
+            );
         $request->assertJsonStructure([]);
         $data = $request->getData();
         $this->assertTrue($data->data[0]->role === 'admin');
