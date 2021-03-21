@@ -38,5 +38,6 @@
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
+        <server name="JWT_SECRET" value="RX1t6VvCENjYWD7MmPP9xC8xrnLHEFqtseBEl5vVLM70cVARXpEXwi1DxTmgt2L1"/>
     </php>
 </phpunit>
