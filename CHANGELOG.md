@@ -1,4 +1,7 @@
-# 0.4.0
+# 0.4.1
++ Fix missing `JWT_KEY` on production deploy
+
+## 0.4.0
 + Add `users` route
 + Add `JWT`
 + Add `login` route

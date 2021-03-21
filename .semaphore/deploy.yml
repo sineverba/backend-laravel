@@ -27,9 +27,9 @@ blocks:
             - docker run -d --name imagetest -e "PORT=9876" -p 9876:9876 $HEROKU_REGISTRY_IMAGE
             - docker exec -it imagetest php -i | grep "PHP Version => 8.0.3"
             - docker login -u _ -p $HEROKU_API_KEY registry.heroku.com
-            - docker push $HEROKU_REGISTRY_IMAGE
             - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
             - heroku config:set APP_VERSION=$SEMAPHORE_GIT_TAG_NAME -a $HEROKU_APP
+            - docker push $HEROKU_REGISTRY_IMAGE
             - heroku container:release web -a $HEROKU_APP
             - heroku run php /var/www/artisan migrate --force --app $HEROKU_APP
             - heroku labs:enable --app=$HEROKU_APP runtime-new-layer-extract
