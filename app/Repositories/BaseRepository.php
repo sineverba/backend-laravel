@@ -13,9 +13,4 @@ class BaseRepository extends Model
     use HasFactory;
     use Paginate;
     use Sort;
-
-    public function index()
-    {
-        return $this->sort(request())->paginate($this->getPerPage());
-    }
 }

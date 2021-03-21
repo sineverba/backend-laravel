@@ -1,4 +1,9 @@
-# 0.3.0
+# 0.4.0
++ Add `users` route
++ Add `JWT`
++ Add `login` route
+
+## 0.3.0
 + Add `roles` route
 + Add `sort` and `paginate`
 + Bump dependencies

@@ -2,14 +2,15 @@
 
 
 namespace Tests\Unit\Repositories;
+
+
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Repositories\UsersRepository;
 
-use App\Repositories\RolesRepository;
-
-class RolesRepositoryTest extends TestCase
+class UsersRepositoryTest extends TestCase
 {
     use DatabaseMigrations;
     use RefreshDatabase;
@@ -19,11 +20,11 @@ class RolesRepositoryTest extends TestCase
      *
      * @return void
      */
-    public function test_can_instantiate_class():void
+    public function test_can_instatiate_class(): void
     {
         $this->withoutExceptionHandling();
-        $repository = new RolesRepository();
-        $this->assertInstanceOf('App\Repositories\RolesRepository', $repository);
+        $repository = new UsersRepository();
+        $this->assertInstanceOf('App\Repositories\UsersRepository', $repository);
     }
 
     /**
@@ -34,7 +35,7 @@ class RolesRepositoryTest extends TestCase
     public function test_index_with_no_data_returns_zero():void
     {
         $this->withoutExceptionHandling();
-        $repository = new RolesRepository();
+        $repository = new UsersRepository();
         $items = $repository->index();
         $this->assertInstanceOf('Illuminate\Pagination\LengthAwarePaginator', $items);
         $this->assertCount(0, $items);
@@ -49,25 +50,25 @@ class RolesRepositoryTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $this->seed(DatabaseSeeder::class);
-        $repository = new RolesRepository();
+        $repository = new UsersRepository();
         $items = $repository->index();
         $this->assertCount(1, $items);
-        $this->assertEquals('admin', $items[0]->role);
+        $this->assertEquals(1, $items[0]->id);
+        $this->assertEquals('info@example.com', $items[0]->email);
+
     }
 
     /**
-     * Test index returns associated users
+     * Test index returns associated role
      *
      * @return void
      */
-    public function test_index_return_associated_users(): void
+    public function test_index_return_associated_role(): void
     {
         $this->withoutExceptionHandling();
         $this->seed(DatabaseSeeder::class);
-        $repository = new RolesRepository();
+        $repository = new UsersRepository();
         $items = $repository->index();
-        $this->assertEquals(1, $items[0]->users[0]->id);
-        $this->assertEquals('info@example.com', $items[0]->users[0]->email);
-
+        $this->assertEquals('admin', $items[0]->roles->role);
     }
 }

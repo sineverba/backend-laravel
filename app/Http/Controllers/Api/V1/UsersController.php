@@ -3,12 +3,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Gateways\RolesGateway;
+use App\Gateways\UsersGateway;
 use App\Http\Controllers\ApiController;
 
-class RolesController extends ApiController
+class UsersController extends ApiController
 {
-    public function __construct(RolesGateway $gateway)
+    public function __construct(UsersGateway $gateway)
     {
         parent::__construct();
         $this->setGateway($gateway);
@@ -16,16 +16,16 @@ class RolesController extends ApiController
 
     /**
      * @OA\Get(
-     *   path="/api/v1/roles",
-     *   summary="Return roles list",
+     *   path="/api/v1/users",
+     *   summary="Return users list",
      *   security={{"bearerAuth":{}}},
-     *   tags={"Roles"},
+     *   tags={"Users"},
      *   @OA\Parameter(ref="#/components/parameters/limit_query"),
      *   @OA\Parameter(ref="#/components/parameters/sort_query"),
      *    @OA\Response(
      *      response=200,
-     *      description="Role list",
-     *      @OA\JsonContent(ref="#/components/schemas/RolesSchema")
+     *      description="Users list",
+     *      @OA\JsonContent(ref="#/components/schemas/UsersSchema")
      *    ),
      *    @OA\Response(
      *      response=401,

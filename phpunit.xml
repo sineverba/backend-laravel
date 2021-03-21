@@ -19,6 +19,7 @@
         <exclude>
             <file>./app/Console/Kernel.php</file>
             <file>./app/Providers/BroadcastServiceProvider.php</file>
+            <file>./app/Http/Middleware/RedirectIfAuthenticated.php</file>
         </exclude>
         <report>
             <clover outputFile="./coverage/clover.xml"/>

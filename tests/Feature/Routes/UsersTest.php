@@ -10,10 +10,10 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class RolesTest extends TestCase
+class UsersTest extends TestCase
 {
-    use DatabaseMigrations;
     use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * Test cannot index without token
@@ -24,7 +24,7 @@ class RolesTest extends TestCase
     {
         $request = $this->json(
             'GET',
-            Route('roles_index')
+            Route('users_index')
         );
         $request->assertJsonStructure(
             [
@@ -38,7 +38,7 @@ class RolesTest extends TestCase
     }
 
     /**
-     * Test GET /roles
+     * Test GET /users
      *
      * @return void
      */
@@ -56,13 +56,13 @@ class RolesTest extends TestCase
                 'Authorization' => 'Bearer '.$token,
             ])
             ->json(
-            'GET',
-            Route('roles_index'),
-            [
-                'sort' => 'id',
-                'direction' => 'desc'
-            ]
-        );
+                'GET',
+                Route('users_index'),
+                [
+                    'sort' => 'id',
+                    'direction' => 'desc'
+                ]
+            );
         $request->assertStatus(200);
         $request->assertJsonStructure(
             [
@@ -80,7 +80,7 @@ class RolesTest extends TestCase
             ]
         );
         $request->assertJsonFragment([
-            'total' => 0,
+            'total' => 1,
             'per_page' => 15
         ]);
 
@@ -92,7 +92,7 @@ class RolesTest extends TestCase
             ])
             ->json(
                 'GET',
-                Route('roles_index'),
+                Route('users_index'),
                 [
                     'sort' => 'id',
                     'direction' => 'desc'
@@ -100,10 +100,12 @@ class RolesTest extends TestCase
             );
         $request->assertJsonStructure([]);
         $data = $request->getData();
-        $this->assertTrue($data->data[0]->role === 'admin');
+        $this->assertEquals(1, $data->data[0]->id);
+        $this->assertEquals('info@example.com', $data->data[1]->email);
+        $this->assertEquals('admin', $data->data[1]->roles->role);
 
         $request->assertJsonFragment([
-            'total' => 1,
+            'total' => 2,
             'per_page' => 15
         ]);
     }

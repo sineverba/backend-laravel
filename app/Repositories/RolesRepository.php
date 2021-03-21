@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\RolesInterface;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -22,6 +23,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *               @OA\Property(
  *                  property="role", description="Name of the role", type="string", example="admin"
  *               ),
+ *               @OA\Property(
+ *                  property="users",
+ *                  description="List of associated Users",
+ *                  type="array",
+ *                   @OA\Items(
+         *               @OA\Property(
+         *                  property="id", description="ID of the user", type="number", example=1
+         *               ),
+         *               @OA\Property(
+         *                  property="email", description="Email", type="string", example="info@example.com"
+         *               ),
+         *          ),
+ *              )
  *          ),
  *   ),
  * )
@@ -46,4 +60,26 @@ class RolesRepository extends BaseRepository implements RolesInterface
         'created_at',
         'updated_at'
     ];
+
+    /**
+     * Return associated users
+     *
+     * @return HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(
+            'App\Repositories\UsersRepository',
+            'role_id',
+            'id'
+        );
+    }
+
+    public function index()
+    {
+        return $this
+            ->with('users')
+            ->sort(request())
+            ->paginate($this->getPerPage());
+    }
 }
