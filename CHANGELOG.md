@@ -1,4 +1,4 @@
-# Next version
+# 0.4.0
 + Add `users` route
 + Add `JWT`
 + Add `login` route
