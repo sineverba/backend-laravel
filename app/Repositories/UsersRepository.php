@@ -65,6 +65,13 @@ class UsersRepository extends Authenticatable implements UsersInterface, JWTSubj
     }
 
     /**
+     * The attributes that should be hidden
+     */
+    protected $hidden = [
+        'password',
+    ];
+
+    /**
      * The name of the table
      *
      * @var string
