@@ -8,9 +8,10 @@ test:
 	docker container rm imagetest
 
 deploy:
+	heroku config:set APP_VERSION=0.4.0 -a backend-laravel
 	docker push registry.heroku.com/backend-laravel/web
 	heroku container:release web -a backend-laravel
-	#heroku run php /var/www/artisan migrate --force --app backend-laravel
+	heroku run php /var/www/artisan migrate --force --app backend-laravel
 	heroku labs:enable --app=backend-laravel runtime-new-layer-extract
 	heroku run php /var/www/artisan l5-swagger:generate --app backend-laravel
 
