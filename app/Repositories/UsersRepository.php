@@ -4,7 +4,13 @@
 namespace App\Repositories;
 
 use App\Interfaces\UsersInterface;
+use App\Traits\Paginate;
+use App\Traits\Sort;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @OA\Schema(
@@ -27,12 +33,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *                  description="Associated roles",
  *                  type="array",
  *                   @OA\Items(
-         *               @OA\Property(
-         *                  property="id", description="ID of the role", type="number", example=1
-         *               ),
-         *               @OA\Property(
-         *                  property="role", description="Role name", type="string", example="admin"
-         *               ),
+ *               @OA\Property(
+ *                  property="id", description="ID of the role", type="number", example=1
+ *               ),
+ *               @OA\Property(
+ *                  property="role", description="Role name", type="string", example="admin"
+ *               ),
  *          ),
  *              )
  *          ),
@@ -40,9 +46,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * )
  */
 
-class UsersRepository extends BaseRepository implements UsersInterface
+class UsersRepository extends Authenticatable implements UsersInterface, JWTSubject
 {
     use SoftDeletes;
+    use HasFactory;
+    use Notifiable;
+    use Paginate;
+    use Sort;
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
     /**
      * The name of the table
      *
@@ -64,8 +85,8 @@ class UsersRepository extends BaseRepository implements UsersInterface
     public function index()
     {
         return $this
-                ->with('roles')
-                ->sort(request())
-                ->paginate($this->getPerPage());
+            ->with('roles')
+            ->sort(request())
+            ->paginate($this->getPerPage());
     }
 }

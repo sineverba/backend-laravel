@@ -10,6 +10,7 @@ class PingController extends ApiController
 {
     public function __construct(PingGateway $gateway)
     {
+        parent::__construct();
         $this->setGateway($gateway);
     }
 
