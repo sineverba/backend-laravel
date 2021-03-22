@@ -1,4 +1,7 @@
-# 0.4.1
+# Next version
++ Fix regenerate L5 Swagger in Docker file
+
+## 0.4.1
 + Fix missing `JWT_KEY` on production deploy
 
 ## 0.4.0
