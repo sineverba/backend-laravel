@@ -4,6 +4,7 @@
 namespace Tests\Feature\Routes;
 
 
+use App\Repositories\RolesRepository;
 use App\Repositories\UsersRepository;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -106,5 +107,137 @@ class RolesTest extends TestCase
             'total' => 1,
             'per_page' => 15
         ]);
+    }
+
+    /**
+     * Test cannot store without token
+     *
+     * @return void
+     */
+    public function test_cannot_store_without_token()
+    {
+        $payload = [
+            'role' => 'user'
+        ];
+        $request = $this->json(
+            'POST',
+            Route('roles_store'),
+            $payload,
+        );
+        $request->assertJsonStructure(
+            [
+                'error',
+            ]
+        );
+        $request->assertStatus(401);
+        $request->assertJsonFragment([
+            'error' => 'Unauthenticated',
+        ]);
+    }
+
+    /**
+     * Test cannot store if validator fails
+     *
+     * @return void
+     */
+    public function test_cannot_store_if_validator_fails()
+    {
+        $this->withoutExceptionHandling();
+        // Create the user
+        $payload = [
+            'email' => 'admin@example.com',
+            'role_id' => null,
+        ];
+        $user = UsersRepository::factory()->create($payload);
+        $token = auth()->fromUser($user);
+
+        // Create first role
+        RolesRepository::factory()->create();
+
+        // Create the request and fails with duplicate
+        $payload = [
+            'role' => 'admin'
+        ];
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+            'POST',
+            Route('roles_store'),
+            $payload,
+        );
+        $request->assertStatus(400);
+        $request->assertJsonFragment(
+            [
+                'role' => [
+                    'The role has already been taken.'
+                ],
+            ]
+        );
+
+        // Create the request and fails with required
+        $payload = [];
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+                'POST',
+                Route('roles_store'),
+                $payload,
+            );
+        $request->assertStatus(400);
+        $request->assertJsonFragment(
+            [
+                'role' => [
+                    'The role field is required.'
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Test can store
+     *
+     * @return void
+     */
+    public function test_can_store()
+    {
+        $this->withoutExceptionHandling();
+        // Create the user
+        $payload = [
+            'email' => 'admin@example.com',
+            'role_id' => null,
+        ];
+        $user = UsersRepository::factory()->create($payload);
+        $token = auth()->fromUser($user);
+
+        $repository = new RolesRepository();
+        $items = $repository->index();
+        $this->assertCount(0, $items);
+
+        $payload = [
+            'role' => 'admin'
+        ];
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+                'POST',
+                Route('roles_store'),
+                $payload,
+            );
+        $request->assertStatus(201);
+        $request->assertJsonFragment(
+            [
+                'success' => 'created',
+            ]
+        );
+
+        $items = $repository->index();
+        $this->assertCount(1, $items);
+
     }
 }

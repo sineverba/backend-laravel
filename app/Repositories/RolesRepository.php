@@ -28,14 +28,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *                  description="List of associated Users",
  *                  type="array",
  *                   @OA\Items(
-         *               @OA\Property(
-         *                  property="id", description="ID of the user", type="number", example=1
-         *               ),
-         *               @OA\Property(
-         *                  property="email", description="Email", type="string", example="info@example.com"
-         *               ),
-         *          ),
+ *                      @OA\Property(
+ *                          property="id", description="ID of the user", type="number", example=1
+ *                      ),
+ *                      @OA\Property(
+ *                          property="email", description="Email", type="string", example="info@example.com"
+ *                      ),
+ *                  ),
  *              )
+ *          ),
+ *   ),
+ * )
+ *
+ *  @OA\Schema(
+ *   schema="RolesPostSchema",
+ *   title="Roles",
+ *   description="Roles model",
+ *   @OA\Property(
+ *          property="data",
+ *          description="New Role",
+ *          type="object",
+ *          @OA\Items(
+ *               @OA\Property(
+ *                  property="role", description="Name of the role", type="string", example="admin"
+ *               )
  *          ),
  *   ),
  * )
@@ -59,6 +75,16 @@ class RolesRepository extends BaseRepository implements RolesInterface
         'name',
         'created_at',
         'updated_at'
+    ];
+
+    /**
+     * The attribute mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'role',
     ];
 
     /**

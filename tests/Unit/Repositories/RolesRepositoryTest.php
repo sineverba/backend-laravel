@@ -3,6 +3,7 @@
 
 namespace Tests\Unit\Repositories;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -68,6 +69,26 @@ class RolesRepositoryTest extends TestCase
         $items = $repository->index();
         $this->assertEquals(1, $items[0]->users[0]->id);
         $this->assertEquals('info@example.com', $items[0]->users[0]->email);
+
+    }
+
+    /**
+     * Test can store new role
+     *
+     * @return void
+     */
+    public function test_can_store(): void
+    {
+        $this->withoutExceptionHandling();
+        $repository = new RolesRepository();
+        $items = $repository->index();
+        $this->assertCount(0, $items);
+        $payload = [
+            'role' => 'admin'
+        ];
+        $repository->store($payload);
+        $items = $repository->index();
+        $this->assertCount(1, $items);
 
     }
 }

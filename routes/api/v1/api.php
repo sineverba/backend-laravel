@@ -7,5 +7,6 @@ Route::get('/ping', 'App\Http\Controllers\Api\V1\PingController@index')->name('p
 Route::post('/login', 'App\Http\Controllers\Api\V1\AuthController@login')->name('login');
 // Roles
 Route::get('/roles', 'App\Http\Controllers\Api\V1\RolesController@index')->name('roles_index');
+Route::post('/roles', 'App\Http\Controllers\Api\V1\RolesController@store')->name('roles_store');
 // Users
 Route::get('/users', 'App\Http\Controllers\Api\V1\UsersController@index')->name('users_index');
