@@ -32,5 +32,40 @@ class RolesController extends ApiController
      *      description="Unauthenticated",
      *    )
      * )
+     *
+     * @OA\Post(
+     *   path="/api/v1/roles",
+     *   summary="Create new role",
+     *   security={{"bearerAuth":{}}},
+     *   tags={"Roles"},
+     *   @OA\RequestBody(
+     *      required=true,
+     *      @OA\JsonContent(
+     *          required={"role"},
+     *          @OA\Property(
+     *              property="role",
+     *              description="The name of the new role",
+     *              type="string",
+     *              example="user",
+     *          )
+     *       ),
+     *   ),
+     *    @OA\Response(
+     *      response=201,
+     *      description="Success message",
+     *      @OA\JsonContent(
+     *          @OA\Property(
+     *              property="succcess",
+     *              description="Success message",
+     *              type="string",
+     *              example="created"
+     *          ),
+     *      )
+     *    ),
+     *    @OA\Response(
+     *      response=400,
+     *      description="Error on body",
+     *    )
+     * )
      */
 }

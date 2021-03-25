@@ -9,7 +9,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "0.3.0"
+        "version": "0.4.1"
     },
     "servers": [
         {
@@ -153,6 +153,59 @@
                         "bearerAuth": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Create new role",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "role"
+                                ],
+                                "properties": {
+                                    "role": {
+                                        "description": "The name of the new role",
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "succcess": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "created"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error on body"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/users": {
@@ -252,6 +305,27 @@
                                         },
                                         "type": "object"
                                     }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "RolesPostSchema": {
+                "title": "Roles",
+                "description": "Roles model",
+                "properties": {
+                    "data": {
+                        "description": "New Role",
+                        "type": "object",
+                        "items": {
+                            "properties": {
+                                "role": {
+                                    "description": "Name of the role",
+                                    "type": "string",
+                                    "example": "admin"
                                 }
                             },
                             "type": "object"

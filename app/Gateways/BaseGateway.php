@@ -3,13 +3,11 @@
 
 namespace App\Gateways;
 
-use Illuminate\Database\Eloquent\Collection;
-
 class BaseGateway
 {
     private $interface;
 
-    private function getInterface()
+    protected function getInterface()
     {
         return $this->interface;
     }
