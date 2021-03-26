@@ -13,7 +13,9 @@ class Authenticate extends Middleware
     private $jwt;
 
     private $whitelistedUris = [
-        'api/v1/ping'
+        'api/v1/ping',
+        'api/v1/login',
+        'api/v1/refresh',
     ];
 
     public function __construct(Auth $auth, JWT $jwt)

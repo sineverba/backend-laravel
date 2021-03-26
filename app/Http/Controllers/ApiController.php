@@ -33,6 +33,13 @@ class ApiController extends Controller
         return $this->success_created_message;
     }
 
+    protected function getErrorMessage($message = null)
+    {
+        return [
+            'error' => $message,
+        ];
+    }
+
     /**
      * Return all resources
      * @return mixed
