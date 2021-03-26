@@ -34,6 +34,8 @@ RUN vendor/bin/phpunit
 ##########################
 FROM php:8.0.3-apache as deploy
 
+RUN apt-get update -y && apt-get upgrade -y
+
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli pdo pdo_mysql

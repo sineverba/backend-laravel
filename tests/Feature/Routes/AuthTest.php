@@ -71,4 +71,69 @@ class AuthTest extends TestCase
             'expires_in'
         ]);
     }
+
+    /**
+     * Test can refresh token
+     *
+     * @return void
+     */
+    public function test_can_refresh_token()
+    {
+        $this->withoutExceptionHandling();
+        $payload = [
+            'email' => 'admin@example.com',
+            'role_id' => null,
+        ];
+        $user = UsersRepository::factory()->create($payload);
+        $token = auth()->fromUser($user);
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+            'POST',
+            (Route('refresh')),
+            [
+                'token' => $token
+            ]
+        );
+        $request->assertStatus(200);
+        $request->assertJsonStructure([
+            'access_token',
+            'token_type',
+            'expires_in'
+        ]);
+        $data = $request->getData();
+        $new_token = $data->access_token;
+        $this->assertNotEquals($new_token, $token);
+    }
+
+    /**
+     * Test cannot refresh token without valid token
+     */
+    public function test_cannot_refresh_token()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->expectException(JWTException::class);
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer invalid',
+            ])
+
+            ->json(
+                'POST',
+                (Route('refresh')),
+                [
+                    'token' => 'invalid'
+                ]
+            );
+        $request->assertStatus(401);
+        $request->assertJsonStructure(
+            [
+                'error'
+            ]
+        );
+        $data = $request->getData();
+        $this->assertTrue($data->error === "Token could not be parsed from the request.");
+    }
 }

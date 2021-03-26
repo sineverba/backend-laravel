@@ -2,6 +2,7 @@
 + Fix regenerate L5 Swagger in Docker file
 + Add volume for MySql
 + Add store role
++ Add refresh token
 
 ## 0.4.1
 + Fix missing `JWT_KEY` on production deploy
