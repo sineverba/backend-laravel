@@ -118,7 +118,7 @@ class AuthController extends ApiController
      *              property="error",
      *              description="The error",
      *              type="string",
-     *              example="invalid username or password"
+     *              example="Token could not be parsed from the request."
      *          ),
      *      )
      *    )
