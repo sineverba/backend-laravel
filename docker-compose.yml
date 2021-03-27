@@ -34,6 +34,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - mysql-backend-laravel:/var/lib/mysql
     networks:
       - backend-laravel
 
@@ -50,3 +52,6 @@ services:
 networks:
   backend-laravel:
     driver: bridge
+
+volumes:
+  mysql-backend-laravel:

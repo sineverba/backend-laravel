@@ -34,6 +34,8 @@ RUN vendor/bin/phpunit
 ##########################
 FROM php:8.0.3-apache as deploy
 
+RUN apt-get update -y && apt-get upgrade -y
+
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli pdo pdo_mysql
@@ -45,5 +47,12 @@ RUN chmod +x /usr/local/bin/start-apache && a2enmod rewrite
 # Copy application source
 COPY --from=builder /usr/src/app /var/www
 RUN chown -R www-data:www-data /var/www
+
+# Generate swagger
+ARG APP_VERSION=0.0.0
+ARG L5_SWAGGER_CONST_HOST=https://backend-laravel.herokuapp.com
+RUN rm /var/www/storage/api-docs/api-docs.json && \
+    php /var/www/artisan l5-swagger:generate
+
 
 CMD ["start-apache"]

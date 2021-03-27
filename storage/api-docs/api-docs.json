@@ -9,7 +9,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "0.3.0"
+        "version": "0.4.1"
     },
     "servers": [
         {
@@ -54,6 +54,81 @@
                 "responses": {
                     "201": {
                         "description": "Sucessful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "description": "The token",
+                                            "type": "string",
+                                            "example": "ey123456789.a1b2c3d4f5"
+                                        },
+                                        "token_type": {
+                                            "description": "Token Type",
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "description": "Expiration token (in seconds)",
+                                            "type": "number",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Wrong credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "The error",
+                                            "type": "string",
+                                            "example": "invalid username or password"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Perform token refresh",
+                "operationId": "App\\Http\\Controllers\\Api\\V1\\AuthController::login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "description": "Previous token",
+                                        "type": "string",
+                                        "example": "eya1.b2.c3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucessful refresh",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -146,6 +221,59 @@
                     },
                     "401": {
                         "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Create new role",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "role"
+                                ],
+                                "properties": {
+                                    "role": {
+                                        "description": "The name of the new role",
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "succcess": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "created"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error on body"
                     }
                 },
                 "security": [
@@ -252,6 +380,27 @@
                                         },
                                         "type": "object"
                                     }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "RolesPostSchema": {
+                "title": "Roles",
+                "description": "Roles model",
+                "properties": {
+                    "data": {
+                        "description": "New Role",
+                        "type": "object",
+                        "items": {
+                            "properties": {
+                                "role": {
+                                    "description": "Name of the role",
+                                    "type": "string",
+                                    "example": "admin"
                                 }
                             },
                             "type": "object"
