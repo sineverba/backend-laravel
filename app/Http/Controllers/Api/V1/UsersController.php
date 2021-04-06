@@ -21,7 +21,9 @@ class UsersController extends ApiController
      *   security={{"bearerAuth":{}}},
      *   tags={"Users"},
      *   @OA\Parameter(ref="#/components/parameters/limit_query"),
+     *   @OA\Parameter(ref="#/components/parameters/page_query"),
      *   @OA\Parameter(ref="#/components/parameters/sort_query"),
+     *   @OA\Parameter(ref="#/components/parameters/direction_sort"),
      *    @OA\Response(
      *      response=200,
      *      description="Users list",

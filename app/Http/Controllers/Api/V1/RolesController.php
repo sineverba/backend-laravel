@@ -21,7 +21,9 @@ class RolesController extends ApiController
      *   security={{"bearerAuth":{}}},
      *   tags={"Roles"},
      *   @OA\Parameter(ref="#/components/parameters/limit_query"),
+     *   @OA\Parameter(ref="#/components/parameters/page_query"),
      *   @OA\Parameter(ref="#/components/parameters/sort_query"),
+     *   @OA\Parameter(ref="#/components/parameters/direction_sort"),
      *    @OA\Response(
      *      response=200,
      *      description="Role list",

@@ -9,7 +9,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "0.4.1"
+        "version": "0.5.0"
     },
     "servers": [
         {
@@ -163,7 +163,7 @@
                                         "error": {
                                             "description": "The error",
                                             "type": "string",
-                                            "example": "invalid username or password"
+                                            "example": "Token could not be parsed from the request."
                                         }
                                     },
                                     "type": "object"
@@ -205,7 +205,13 @@
                         "$ref": "#/components/parameters/limit_query"
                     },
                     {
+                        "$ref": "#/components/parameters/page_query"
+                    },
+                    {
                         "$ref": "#/components/parameters/sort_query"
+                    },
+                    {
+                        "$ref": "#/components/parameters/direction_sort"
                     }
                 ],
                 "responses": {
@@ -294,7 +300,13 @@
                         "$ref": "#/components/parameters/limit_query"
                     },
                     {
+                        "$ref": "#/components/parameters/page_query"
+                    },
+                    {
                         "$ref": "#/components/parameters/sort_query"
+                    },
+                    {
+                        "$ref": "#/components/parameters/direction_sort"
                     }
                 ],
                 "responses": {
@@ -456,6 +468,15 @@
             }
         },
         "parameters": {
+            "page_query": {
+                "name": "page",
+                "in": "query",
+                "description": "Page number of results",
+                "schema": {
+                    "type": "number",
+                    "default": 1
+                }
+            },
             "limit_query": {
                 "name": "per_page",
                 "in": "query",
@@ -472,6 +493,15 @@
                 "schema": {
                     "type": "string",
                     "default": "id"
+                }
+            },
+            "direction_sort": {
+                "name": "direction",
+                "in": "query",
+                "description": "Direction of sort",
+                "schema": {
+                    "type": "string",
+                    "default": "asc"
                 }
             }
         },

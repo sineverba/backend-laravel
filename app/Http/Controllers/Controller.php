@@ -17,6 +17,15 @@ use Illuminate\Routing\Controller as BaseController;
  *      bearerFormat="JWT",
  * ),
  * @OA\Parameter(
+ *   parameter="page_query",
+ *   name="page",
+ *   description="Page number of results",
+ *   in="query",
+ *   @OA\Schema(
+ *     type="number", default=1
+ *   )
+ * ),
+ * @OA\Parameter(
  *   parameter="limit_query",
  *   name="per_page",
  *   description="Limit the number of results",
@@ -32,6 +41,15 @@ use Illuminate\Routing\Controller as BaseController;
  *   in="query",
  *   @OA\Schema(
  *     type="string", default="id"
+ *   )
+ * ),
+ * @OA\Parameter(
+ *   parameter="direction_sort",
+ *   name="direction",
+ *   description="Direction of sort",
+ *   in="query",
+ *   @OA\Schema(
+ *     type="string", default="asc"
  *   )
  * ),
  */
