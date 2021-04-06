@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   test-unit:
     docker:
-      - image: sineverba/php8xc:1.0.0
+      - image: sineverba/php8xc:1.1.5
     steps:
       - checkout
       - run: composer install

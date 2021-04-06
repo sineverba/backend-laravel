@@ -3,7 +3,7 @@
 ##########################
 FROM php:8.0.3-cli-alpine as builder
 
-COPY --from=composer:2.0.11 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.0.12 /usr/bin/composer /usr/bin/composer
 
 RUN mkdir -p /usr/src/app
 

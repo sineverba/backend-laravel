@@ -72,7 +72,7 @@ class RolesRepository extends BaseRepository implements RolesInterface
      */
     public $sortables = [
         'id',
-        'name',
+        'role',
         'created_at',
         'updated_at'
     ];

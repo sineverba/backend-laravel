@@ -1,4 +1,8 @@
-# 0.5.0
+# Next version
++ Fix order by role
++ Add swagger documentation
+
+## 0.5.0
 + Fix regenerate L5 Swagger in Docker file
 + Add volume for MySql
 + Add store role
