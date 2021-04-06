@@ -1,4 +1,4 @@
-# Next version
+# 0.6.0
 + Fix order by role
 + Add swagger documentation
 + Bump dependencies
