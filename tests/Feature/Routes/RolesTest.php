@@ -240,4 +240,63 @@ class RolesTest extends TestCase
         $this->assertCount(1, $items);
 
     }
+
+    /**
+     * Test cannot show without token
+     *
+     * @return void
+     */
+    public function test_cannot_show_without_token()
+    {
+        $request = $this->json(
+            'GET',
+            Route('roles_show',
+                [
+                    'id' => 1,
+                ]
+            )
+        );
+        $request->assertJsonStructure(
+            [
+                'error',
+            ]
+        );
+        $request->assertStatus(401);
+        $request->assertJsonFragment([
+            'error' => 'Unauthenticated',
+        ]);
+    }
+
+    /**
+     * Test can show
+     *
+     * @return void
+     */
+    public function test_can_show()
+    {
+        $this->withoutExceptionHandling();
+        $payload = [
+            'email' => 'admin@example.com',
+            'role_id' => null,
+        ];
+        $user = UsersRepository::factory()->create($payload);
+        $token = auth()->fromUser($user);
+        $this->seed(DatabaseSeeder::class);
+        $request = $this
+            ->withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])
+            ->json(
+            'GET',
+            Route('roles_show',
+                [
+                    'id' => 1,
+                ]
+            )
+        );
+        $request->assertStatus(200);
+        $data = $request->getData();
+        $this->assertTrue($data->id === 1);
+        $this->assertTrue($data->role === 'admin');
+    }
 }

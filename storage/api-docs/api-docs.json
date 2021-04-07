@@ -289,6 +289,34 @@
                 ]
             }
         },
+        "/api/v1/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Return single role",
+                "responses": {
+                    "200": {
+                        "description": "Single Role",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RolesShowSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/stats": {
             "get": {
                 "tags": [
@@ -463,6 +491,28 @@
                             },
                             "type": "object"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "RolesShowSchema": {
+                "title": "Role",
+                "description": "Role model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the role",
+                        "type": "number",
+                        "example": 1
+                    },
+                    "role": {
+                        "description": "Name of the role",
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "created_at": {
+                        "description": "Date of creation",
+                        "type": "date",
+                        "example": "01-01-2020 00:00:00Z000"
                     }
                 },
                 "type": "object"
