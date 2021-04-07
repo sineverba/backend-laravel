@@ -11,3 +11,5 @@ Route::get('/roles', 'App\Http\Controllers\Api\V1\RolesController@index')->name(
 Route::post('/roles', 'App\Http\Controllers\Api\V1\RolesController@store')->name('roles_store');
 // Users
 Route::get('/users', 'App\Http\Controllers\Api\V1\UsersController@index')->name('users_index');
+// Stats
+Route::get('/stats', 'App\Http\Controllers\Api\V1\StatsController@index')->name('stats_index');
