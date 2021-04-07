@@ -62,4 +62,12 @@ class ApiController extends Controller
         }
         return response()->json($store, 400);
     }
+
+    /**
+     * Show single resource
+     */
+    protected function show($id)
+    {
+        return $this->getGateway()->show($id);
+    }
 }

@@ -91,4 +91,19 @@ class RolesRepositoryTest extends TestCase
         $this->assertCount(1, $items);
 
     }
+
+    /**
+     * Test can get single item
+     *
+     * @return void
+     */
+    public function test_can_show():void
+    {
+        $this->withoutExceptionHandling();
+        RolesRepository::factory()->create();
+        $repository = new RolesRepository();
+        $item = $repository->show(1);
+        $this->assertTrue($item->id === 1);
+        $this->assertTrue($item->role === 'admin');
+    }
 }

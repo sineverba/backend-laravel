@@ -21,4 +21,9 @@ class BaseGateway
     {
         return $this->getInterface()->index();
     }
+
+    public function show(int $id)
+    {
+        return $this->getInterface()->show($id);
+    }
 }

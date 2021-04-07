@@ -34,6 +34,21 @@ class RolesController extends ApiController
      *      description="Unauthenticated",
      *    )
      * )
+     *  @OA\Get(
+     *   path="/api/v1/roles/{id}",
+     *   summary="Return single role",
+     *   security={{"bearerAuth":{}}},
+     *   tags={"Roles"},
+     *    @OA\Response(
+     *      response=200,
+     *      description="Single Role",
+     *      @OA\JsonContent(ref="#/components/schemas/RolesShowSchema")
+     *    ),
+     *    @OA\Response(
+     *      response=401,
+     *      description="Unauthenticated",
+     *    )
+     * )
      *
      * @OA\Post(
      *   path="/api/v1/roles",

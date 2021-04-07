@@ -24,4 +24,13 @@ class BaseRepository extends Model
         $this->create($payload);
         return true;
     }
+
+    /**
+     * Show single model
+     * @param int $id
+     */
+    public function show(int $id)
+    {
+        return $this->findOrFail($id);
+    }
 }
