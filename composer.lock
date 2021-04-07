@@ -1044,16 +1044,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.35.1",
+            "version": "v8.36.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d118c0df39e7524131176aaf76493eae63a8a602"
+                "reference": "91c454715b81b9a39f718651d4e2f8104d45e7c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d118c0df39e7524131176aaf76493eae63a8a602",
-                "reference": "d118c0df39e7524131176aaf76493eae63a8a602",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/91c454715b81b9a39f718651d4e2f8104d45e7c2",
+                "reference": "91c454715b81b9a39f718651d4e2f8104d45e7c2",
                 "shasum": ""
             },
             "require": {
@@ -1208,7 +1208,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-03-30T21:34:17+00:00"
+            "time": "2021-04-06T21:14:06+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -6053,16 +6053,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.18.4",
+            "version": "v2.18.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "06f764e3cb6d60822d8f5135205f9d32b5508a31"
+                "reference": "e0f6d05c8b157f50029ca6c65c19ed2694f475bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/06f764e3cb6d60822d8f5135205f9d32b5508a31",
-                "reference": "06f764e3cb6d60822d8f5135205f9d32b5508a31",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/e0f6d05c8b157f50029ca6c65c19ed2694f475bf",
+                "reference": "e0f6d05c8b157f50029ca6c65c19ed2694f475bf",
                 "shasum": ""
             },
             "require": {
@@ -6145,7 +6145,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.4"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.5"
             },
             "funding": [
                 {
@@ -6153,7 +6153,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-20T14:52:33+00:00"
+            "time": "2021-04-06T18:37:33+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
