@@ -2,6 +2,7 @@
 + Change API documentation URL
 + Add custom 404 Exception
 + Add show rule route
++ Update dependencies
 
 ## 0.7.0
 + Add stats route
