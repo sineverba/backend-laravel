@@ -1,4 +1,7 @@
-# 0.8.0
+# Next version
++ Remove Scrutinizer coverage badge
+
+## 0.8.0
 + Change API documentation URL
 + Add custom 404 Exception
 + Add show rule route
