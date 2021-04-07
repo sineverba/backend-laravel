@@ -1,4 +1,7 @@
-# 0.7.0
+# Next version
++ Change API documentation URL
+
+## 0.7.0
 + Add stats route
 + Bump dependencies
 

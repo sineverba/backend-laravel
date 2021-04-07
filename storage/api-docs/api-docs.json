@@ -9,7 +9,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "0.5.0"
+        "version": "0.7.0"
     },
     "servers": [
         {
@@ -295,6 +295,7 @@
                     "Stats"
                 ],
                 "summary": "Return statistics",
+                "operationId": "App\\Http\\Controllers\\Api\\V1\\StatsController::__construct",
                 "responses": {
                     "200": {
                         "description": "Stats",
