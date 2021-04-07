@@ -55,6 +55,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          ),
  *   ),
  * )
+ *
+ * @OA\Schema(
+ *   schema="RolesShowSchema",
+ *   title="Role",
+ *   description="Role model",
+ *   @OA\Property(
+ *      property="id", description="ID of the role", type="number", example=1
+ *   ),
+ *   @OA\Property(
+ *      property="role", description="Name of the role", type="string", example="admin"
+ *   ),
+ *   @OA\Property(
+ *      property="created_at", description="Date of creation", type="date", example="2021-03-21T19:53:56.000000Z"
+ *   ),
+ *     @OA\Property(
+ *      property="updated_at", description="Date of update", type="date", example="2021-03-21T19:53:56.000000Z"
+ *   ),
+ *     @OA\Property(
+ *      property="deleted_at", description="Date of delete", type="date", example="2021-03-21T19:53:56.000000Z"
+ *   ),
+ * )
  */
 
 class RolesRepository extends BaseRepository implements RolesInterface

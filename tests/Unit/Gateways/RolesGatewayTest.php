@@ -86,4 +86,18 @@ class RolesGatewayTest extends TestCase
         $store = $gateway->store($payload);
         $this->assertTrue($store);
     }
+
+    /**
+     * Test can show
+     *
+     * @return void
+     */
+    public function test_can_show():void
+    {
+        $gateway = $this->app->make($this->gateway);
+        $this->seed(DatabaseSeeder::class);
+        $item = $gateway->show(1);
+        $this->assertTrue($item->id === 1);
+        $this->assertTrue($item->role === 'admin');
+    }
 }
