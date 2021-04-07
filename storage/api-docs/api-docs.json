@@ -289,6 +289,34 @@
                 ]
             }
         },
+        "/api/v1/stats": {
+            "get": {
+                "tags": [
+                    "Stats"
+                ],
+                "summary": "Return statistics",
+                "responses": {
+                    "200": {
+                        "description": "Stats",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StatsSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/users": {
             "get": {
                 "tags": [
@@ -334,6 +362,23 @@
     },
     "components": {
         "schemas": {
+            "StatsSchema": {
+                "title": "Stats",
+                "description": "Statistics model",
+                "properties": {
+                    "users": {
+                        "description": "Number of the user in the database",
+                        "type": "number",
+                        "example": 3
+                    },
+                    "roles": {
+                        "description": "Number of the roles in the database",
+                        "type": "number",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
             "PingSchema": {
                 "title": "Ping",
                 "description": "Ping model",

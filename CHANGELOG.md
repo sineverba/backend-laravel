@@ -1,4 +1,8 @@
-# 0.6.0
+# 0.7.0
++ Add stats route
++ Bump dependencies
+
+## 0.6.0
 + Fix order by role
 + Add swagger documentation
 + Bump dependencies
