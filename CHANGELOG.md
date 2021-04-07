@@ -1,4 +1,4 @@
-# Next version
+# 0.7.0
 + Add stats route
 + Bump dependencies
 
