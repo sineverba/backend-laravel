@@ -1,5 +1,6 @@
 # Next version
 + Add stats route
++ Bump dependencies
 
 ## 0.6.0
 + Fix order by role
