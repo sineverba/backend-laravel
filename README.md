@@ -21,19 +21,15 @@ If you like this project or use it, **Star it!**. Your stars motivate developers
 | Composer | 2 |
 | Laravel | 8 |
 
-## Available routes
-
-Swagger documentation at {your_host}/api/documentation
-
 ## How setup it
 
 ```bash
 $ cp .env.example .env
-$ php artisan key:generate
 $ docker-compose build app
 $ docker-compose up -d
 $ docker-compose exec app composer install
 $ docker-compose exec app php artisan key:generate
+$ docker-compose exec app php artisan jwt:secret
 ```
 
 ## How to contribute
