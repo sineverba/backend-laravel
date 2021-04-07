@@ -1,4 +1,4 @@
-# Next version
+# 0.8.0
 + Change API documentation URL
 + Add custom 404 Exception
 + Add show rule route
