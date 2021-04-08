@@ -136,4 +136,35 @@ class AuthTest extends TestCase
         $data = $request->getData();
         $this->assertTrue($data->error === "Token could not be parsed from the request.");
     }
+
+    /**
+     * Test can login with unused keys
+     *
+     * @return void
+     */
+    public function test_can_login_with_unused_keys()
+    {
+        $this->withoutExceptionHandling();
+        $payload = [
+            'email' => 'info@example.com',
+            'password' => Hash::make('password'),
+            'role_id' => null,
+        ];
+        UsersRepository::factory()->create($payload);
+        $request = $this->json(
+            'POST',
+            (Route('login')),
+            [
+                'email' => 'info@example.com',
+                'password' => 'password',
+                'foo' => 'bar'
+            ]
+        );
+        $request->assertStatus(200);
+        $request->assertJsonStructure([
+            'access_token',
+            'token_type',
+            'expires_in'
+        ]);
+    }
 }

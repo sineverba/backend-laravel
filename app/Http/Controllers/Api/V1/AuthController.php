@@ -131,7 +131,7 @@ class AuthController extends ApiController
 
     public function login(Request $request)
     {
-        $credentials = json_decode($request->getContent(), true);
+        $credentials = $request->only(['email', 'password']);
         if (!$token = auth()->attempt($credentials)) {
             return response()->json([
                 'error' => 'Invalid username or password'
