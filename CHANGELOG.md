@@ -1,4 +1,7 @@
-# 0.8.1
+# Next version
++ Remove Scrutinizer coverage badge
+
+## 0.8.1
 + Fix login issues with different keys
 
 ## 0.8.0
